@@ -1,0 +1,11 @@
+quarkus:
+  datasource:
+    db-kind: postgresql
+    username: postgres
+    password: admin
+    jdbc:
+      url: jdbc:postgresql://10.30.3.248:5432/demo
+      max-size: 20
+  hibernate-orm:
+    database:
+      generation: update
