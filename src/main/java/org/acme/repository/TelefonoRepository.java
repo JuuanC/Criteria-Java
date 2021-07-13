@@ -9,9 +9,15 @@ import java.util.List;
 
 @ApplicationScoped
 public class TelefonoRepository extends Repository<Telefono>{
+
     @Override
-    public List get(Class<Telefono> entity, ConsultaDTO consultaDTO) {
-        return super.get(entity, consultaDTO);
+    Class<Telefono> getEntity() {
+        return Telefono.class;
+    }
+
+    @Override
+    public List get(ConsultaDTO consultaDTO) {
+        return super.get(consultaDTO);
     }
 
     @Transactional
@@ -20,9 +26,9 @@ public class TelefonoRepository extends Repository<Telefono>{
         return super.save(entity);
     }
 
-    @Transactional
+    /*@Transactional
     @Override
-    public Telefono update(Telefono entity) {
-        return super.update(entity);
-    }
+    public Telefono update(Class<Telefono> entity, Telefono element) {
+        return super.update(Telefono.class, element);
+    }*/
 }

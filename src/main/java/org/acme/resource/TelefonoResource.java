@@ -6,6 +6,7 @@ import org.acme.entity.Telefono;
 import org.acme.repository.TelefonoRepository;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -18,6 +19,7 @@ public class TelefonoResource {
     @Inject
     TelefonoRepository telefonoRepository;
 
+    @Transactional
     @POST
     public Telefono save(Telefono telefono) {
         return telefonoRepository.save(telefono);
@@ -26,6 +28,6 @@ public class TelefonoResource {
     @GET
     public Response filtro(ConsultaDTO consultaDTO) {
         return Response.status(200).entity(new ResponseDTO(false, 200,
-                "La info se obtuvo", telefonoRepository.get(Telefono.class, consultaDTO))).build();
+                "La info se obtuvo", telefonoRepository.get(consultaDTO))).build();
     }
 }

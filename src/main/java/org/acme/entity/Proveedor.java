@@ -11,13 +11,15 @@ import java.util.List;
 @Table(name = "proveedor", schema = "test")
 public class Proveedor {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_proveedor")
-    private int idProveedor;
+
 
     @Column(name = "nombre", length = 50)
     @Pattern(message = "Error: el Nombre no puede tener números o caracteres especiales", regexp = "^[a-zA-Z]*$")
     private String nombre;
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_proveedor")
+    private int idProveedor;
 
     @Pattern(message = "Error: el APELLIDO no puede tener números o caracteres especiales", regexp = "^[a-zA-Z]*$")
     @Column(name = "apellido_paterno", length = 100)
@@ -27,6 +29,9 @@ public class Proveedor {
     @Column(name = "apellido_materno", length = 100)
     private String apellidoMaterno;
 
+    @Column(name = "es_baja_logica")
+    private boolean esBajaLogica;
+
     @OneToMany(mappedBy = "proveedor", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Telefono> telefonos;
@@ -34,11 +39,12 @@ public class Proveedor {
     public Proveedor() {
     }
 
-    public Proveedor(int idProveedor, String nombre, String apellidoPaterno, String apellidoMaterno, List<Telefono> telefonos) {
+    public Proveedor(int idProveedor, String nombre, String apellidoPaterno, String apellidoMaterno, boolean esBajaLogica, List<Telefono> telefonos) {
         this.idProveedor = idProveedor;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
+        this.esBajaLogica = esBajaLogica;
         this.telefonos = telefonos;
     }
 
@@ -80,6 +86,14 @@ public class Proveedor {
 
     public void setTelefonos(List<Telefono> telefonos) {
         this.telefonos = telefonos;
+    }
+
+    public boolean isEsBajaLogica() {
+        return esBajaLogica;
+    }
+
+    public void setEsBajaLogica(boolean esBajaLogica) {
+        this.esBajaLogica = esBajaLogica;
     }
 
     public static List<Proveedor> withoutTelefonos(List<Proveedor> proveedores){

@@ -1,4 +1,6 @@
 quarkus:
+  http:
+    port: 8081
   datasource:
     db-kind: postgresql
     username: postgres

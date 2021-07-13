@@ -1,17 +1,29 @@
 package org.acme.repository;
 
+import org.acme.dto.UpdateDTO;
 import org.acme.dto.consulta.ConsultaDTO;
 import org.acme.entity.Proveedor;
+
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.List;
 
 @ApplicationScoped
 public class ProveedorRepository extends Repository<Proveedor> {
 
+    @Inject
+    EntityManager entityManager;
+
     @Override
-    public List get(Class<Proveedor> entity, ConsultaDTO consultaDTO) {
-        return super.get(Proveedor.class, consultaDTO);
+    Class<Proveedor> getEntity() {
+        return Proveedor.class;
+    }
+
+    @Override
+    public List get(ConsultaDTO consultaDTO) {
+        return super.get(consultaDTO);
     }
 
     @Transactional
@@ -22,7 +34,24 @@ public class ProveedorRepository extends Repository<Proveedor> {
 
     @Transactional
     @Override
-    public Proveedor update(Proveedor entity) {
-        return super.update(entity);
+    public void update(UpdateDTO element) {
+        super.update(element);
     }
+
+    @Transactional
+    @Override
+    public void bajaLogica(int value) {
+        super.bajaLogica(value);
+    }
+
+    @Override
+    public void altaLogica(int value) {
+        super.altaLogica(value);
+    }
+
+    @Override
+    public List getLike(ConsultaDTO consultaDTO) {
+        return super.getLike(consultaDTO);
+    }
+
 }
