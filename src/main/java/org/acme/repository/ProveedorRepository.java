@@ -5,16 +5,11 @@ import org.acme.dto.consulta.ConsultaDTO;
 import org.acme.entity.Proveedor;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.List;
 
 @ApplicationScoped
 public class ProveedorRepository extends Repository<Proveedor> {
-
-    @Inject
-    EntityManager entityManager;
 
     @Override
     Class<Proveedor> getEntity() {
@@ -22,8 +17,8 @@ public class ProveedorRepository extends Repository<Proveedor> {
     }
 
     @Override
-    public List get(ConsultaDTO consultaDTO) {
-        return super.get(consultaDTO);
+    public List get(ConsultaDTO consultaDTO, boolean bajaLogica) {
+        return super.get(consultaDTO, bajaLogica);
     }
 
     @Transactional
@@ -50,8 +45,8 @@ public class ProveedorRepository extends Repository<Proveedor> {
     }
 
     @Override
-    public List getLike(ConsultaDTO consultaDTO) {
-        return super.getLike(consultaDTO);
+    public List getLike(ConsultaDTO consultaDTO, boolean bajaLogica) {
+        return super.getLike(consultaDTO, bajaLogica);
     }
 
 }

@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @ApplicationScoped
-public class TelefonoRepository extends Repository<Telefono>{
+public class TelefonoRepository extends Repository<Telefono> {
 
     @Override
     Class<Telefono> getEntity() {
@@ -16,8 +16,8 @@ public class TelefonoRepository extends Repository<Telefono>{
     }
 
     @Override
-    public List get(ConsultaDTO consultaDTO) {
-        return super.get(consultaDTO);
+    public List get(ConsultaDTO consultaDTO, boolean bajaLogica) {
+        return super.get(consultaDTO, bajaLogica);
     }
 
     @Transactional

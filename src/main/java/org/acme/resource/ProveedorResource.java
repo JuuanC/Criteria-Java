@@ -43,20 +43,20 @@ public class ProveedorResource {
     @GET
     public Response filtro(ConsultaDTO consultaDTO) {
         return Response.status(200).entity(new ResponseDTO(false, 200,
-                "La info se obtuvo", proveedorRepository.get(consultaDTO))).build();
+                "La info se obtuvo", proveedorRepository.get(consultaDTO, false))).build();
     }
 
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @PUT
-    public Response update(UpdateDTO updateDTO){
+    public Response update(UpdateDTO updateDTO) {
         proveedorRepository.update(updateDTO);
         return Response.status(200).entity(new ResponseDTO(true, 200,
                 "El proveedor se ha registrado con éxito", null)).build();
     }
 
     @DELETE
-    public Response bajaLogica(@QueryParam("id") int id){
+    public Response bajaLogica(@QueryParam("id") int id) {
         proveedorRepository.bajaLogica(id);
         return Response.status(200).entity(new ResponseDTO(true, 200,
                 "El proveedor se ha dado de baja con éxito", null)).build();
@@ -68,6 +68,6 @@ public class ProveedorResource {
     @Path("like")
     public Response like(ConsultaDTO consultaDTO) {
         return Response.status(200).entity(new ResponseDTO(false, 200,
-                "La info se obtuvo", proveedorRepository.getLike(consultaDTO))).build();
+                "La info se obtuvo", proveedorRepository.getLike(consultaDTO, false))).build();
     }
 }

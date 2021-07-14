@@ -16,7 +16,7 @@ public abstract class Repository<E> {
 
     abstract Class<E> getEntity();
 
-    public List get(ConsultaDTO consultaDTO) {
+    public List get(ConsultaDTO consultaDTO, boolean bajaLogica) {
         //CREACIÓN DE OBJETOS PARA LA QUERY
         CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
         CriteriaQuery criteriaQuery = getCriteriaQuery(criteriaBuilder);
@@ -37,6 +37,7 @@ public abstract class Repository<E> {
                             .equal(root.get(entry.getKey()).as(String.class),
                                     entry.getValue()));
         }
+        predicate.getExpressions().add(criteriaBuilder.equal(root.get("esBajaLogica"), bajaLogica));
 
         //FILTRO POR RANGO
         if (consultaDTO.getRango() != null) {
@@ -102,7 +103,7 @@ public abstract class Repository<E> {
         entityManager.createQuery(criteriaUpdate).executeUpdate();
     }
 
-    public List getLike(ConsultaDTO consultaDTO) {
+    public List getLike(ConsultaDTO consultaDTO, boolean bajaLogica) {
         //CREACIÓN DE OBJETOS PARA LA QUERY
         CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
         CriteriaQuery criteriaQuery = getCriteriaQuery(criteriaBuilder);
@@ -124,6 +125,7 @@ public abstract class Repository<E> {
                                     //Solo se trae lo objetos que empiecen con dicha letra
                                     entry.getValue()+"%"));
         }
+        predicate.getExpressions().add(criteriaBuilder.equal(root.get("esBajaLogica"), bajaLogica));
 
         criteriaQuery.where(predicate);
         System.out.println(criteriaQuery);

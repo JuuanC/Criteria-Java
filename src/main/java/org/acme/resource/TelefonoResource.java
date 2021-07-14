@@ -28,6 +28,6 @@ public class TelefonoResource {
     @GET
     public Response filtro(ConsultaDTO consultaDTO) {
         return Response.status(200).entity(new ResponseDTO(false, 200,
-                "La info se obtuvo", telefonoRepository.get(consultaDTO))).build();
+                "La info se obtuvo", telefonoRepository.get(consultaDTO, false))).build();
     }
 }
